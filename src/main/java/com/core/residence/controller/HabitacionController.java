@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/habitacion")
 public class HabitacionController {
-
+/*
     @Autowired
     private HabitacionRepository habitacionRepository;
 
@@ -20,4 +20,5 @@ public class HabitacionController {
         habitacionRepository.save(habitacion);
         return ResponseEntity.ok().build();
     }
+    */
 }

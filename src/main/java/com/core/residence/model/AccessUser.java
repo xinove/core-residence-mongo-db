@@ -14,12 +14,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-@Document(collection = "usuarios")
-public class User {
+@Document(collection = "usuarios_accesos")
+public class AccessUser {
     @Id
     private String id;
     private String nombre;
     private String email;
     
-    private AccessUser accessUser;
+//    private AccessUser accessUser;
 }
