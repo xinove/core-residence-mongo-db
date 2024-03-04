@@ -9,6 +9,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
@@ -18,9 +19,18 @@ import com.core.residence.repositories.UsuarioRepository;
 
 public class UsuarioRepositoryImpl implements UsuarioRepository {
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
+	private final MongoOperations mongoOperations;
 
+	@Autowired
+    public UsuarioRepositoryImpl(MongoOperations mongoOperations) {
+        this.mongoOperations = mongoOperations;
+    }
+
+	@Override
+	public User saveUser(User user) {
+		mongoOperations.save(user);
+		return user;
+	}
 	@Override
 	public <S extends User> S insert(S entity) {
 		// TODO Auto-generated method stub

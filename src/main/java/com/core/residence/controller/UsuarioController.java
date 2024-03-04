@@ -1,12 +1,18 @@
 package com.core.residence.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.core.residence.dto.UserDto;
 import com.core.residence.model.User;
 import com.core.residence.repositories.UsuarioRepository;
+import com.core.residence.service.UserService;
 
 import java.util.List;
 
@@ -15,10 +21,18 @@ import java.util.List;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UserService userService;
 
     @GetMapping
     public List<User> obtenerTodosLosUsuarios() {
-        return usuarioRepository.findAll();
+        return userService.findAll();
     }
+
+    @PostMapping("/users")
+    public ResponseEntity<?> createUser(@RequestBody UserDto userDto) {
+    	
+        User newUser = userService.createUser(userDto);
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+    }
+    
 }

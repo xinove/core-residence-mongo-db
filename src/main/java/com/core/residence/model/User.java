@@ -18,7 +18,8 @@ import lombok.ToString;
 public class User {
     @Id
     private String id;
-    private String nombre;
+    private String name;
+    private String password;
     private String email;
     
     private AccessUser accessUser;

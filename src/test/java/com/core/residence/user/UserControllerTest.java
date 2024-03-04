@@ -27,8 +27,8 @@ public class UserControllerTest {
         // Arrange
         assertEquals(2, 2);
 
-        User user1 = new User("1", "Usuario 1", "usuario1@example.com", null);
-        User user2 = new User("2", "Usuario 2", "usuario2@example.com", null);
+        User user1 = new User("1", "Usuario 1", "pass1",  "usuario1@example.com", null);
+        User user2 = new User("2", "Usuario 2", "pass2",  "usuario2@example.com", null);
         List<User> usuarios = Arrays.asList(user1, user2);
         when(userRepositoryMock.findAll()).thenReturn(usuarios);
 
@@ -37,9 +37,9 @@ public class UserControllerTest {
 
         // Assert
         assertEquals(2, usuariosObtenidos.size());
-        assertEquals("Usuario 1", usuariosObtenidos.get(0).getNombre());
+        assertEquals("Usuario 1", usuariosObtenidos.get(0).getName());
         assertEquals("usuario1@example.com", usuariosObtenidos.get(0).getEmail());
-        assertEquals("Usuario 2", usuariosObtenidos.get(1).getNombre());
+        assertEquals("Usuario 2", usuariosObtenidos.get(1).getName());
         assertEquals("usuario2@example.com", usuariosObtenidos.get(1).getEmail());
     }
 }
