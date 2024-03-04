@@ -7,18 +7,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.core.residence.model.Room;
+import com.core.residence.repositories.HabitacionRepository;
+
 // Controlador REST para manejar las solicitudes HTTP relacionadas con las habitaciones
 @RestController
 @RequestMapping("/habitacion")
 public class HabitacionController {
-/*
+
     @Autowired
     private HabitacionRepository habitacionRepository;
 
     @PostMapping
     public ResponseEntity<?> crearHabitacion(@RequestBody Room habitacion) {
-        habitacionRepository.save(habitacion);
+        habitacionRepository.saveRoom(habitacion);
         return ResponseEntity.ok().build();
     }
-    */
+    
 }

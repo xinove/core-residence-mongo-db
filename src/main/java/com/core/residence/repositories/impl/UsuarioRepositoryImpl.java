@@ -169,5 +169,11 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
 		return null;
 	}
 
+	@Override
+	public Optional<User> findById(Long userId) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
+
     // Implementación personalizada de métodos del repositorio si es necesario
 }
