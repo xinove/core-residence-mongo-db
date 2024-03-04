@@ -12,12 +12,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
+import org.springframework.stereotype.Repository;
 
 import com.core.residence.model.Room;
 import com.core.residence.model.User;
 import com.core.residence.repositories.HabitacionRepository;
 import com.core.residence.repositories.UsuarioRepository;
 
+@Repository
 
 public class HabitacionRepositoryImpl implements HabitacionRepository {
 

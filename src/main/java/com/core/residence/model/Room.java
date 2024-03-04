@@ -1,5 +1,7 @@
 package com.core.residence.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +13,7 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Document(collection = "habitaciones")
 public class Room {
 
 	private String name;
