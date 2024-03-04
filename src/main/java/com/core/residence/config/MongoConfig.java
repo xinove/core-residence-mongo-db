@@ -1,4 +1,4 @@
-package com.core.residence.cofig;
+package com.core.residence.config;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import org.springframework.context.annotation.Bean;

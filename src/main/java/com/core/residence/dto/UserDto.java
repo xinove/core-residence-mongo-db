@@ -12,10 +12,11 @@ import lombok.ToString;
 @Data
 @ToString
 public class UserDto {
+	
+	private Long id;
 
     private String username;
     private String password;
     private String email;
 
-    // Getters y setters
 }
