@@ -16,10 +16,12 @@ import com.core.residence.model.User;
 import com.core.residence.repositories.UsuarioRepository;
 import com.core.residence.service.UserService;
 
-import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+@Slf4j
 @RestController
-@RequestMapping("/usuarios")
+//@RequestMapping("/usuarios")
 public class UsuarioController {
 
     @Autowired
@@ -29,10 +31,26 @@ public class UsuarioController {
     public List<User> obtenerTodosLosUsuarios() {
         return userService.findAll();
     }
+    @GetMapping("/users/{id}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+        // Aquí puedes realizar la lógica para obtener un usuario por su ID
+    	System.out.println("HOLAAA X DIOS");
+        //UserDto userDto = userService.getUserById(id);
 
+        // Verificar si se encontró el usuario
+//        if (userDto != null) {
+        	if (true) {
+            // Devolver el usuario y el estado HTTP 200 OK si se encontró
+            return new ResponseEntity<>( HttpStatus.OK);
+        } else {
+            // Devolver un estado HTTP 404 Not Found si el usuario no se encontró
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
     @PostMapping("/users")
     public ResponseEntity<?> createUser(@RequestBody UserDto userDto) {
-    	
+    	System.out.println("hola q pasa");
+    	log.info("Hola??");    	
         User newUser = userService.createUser(userDto);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
