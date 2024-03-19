@@ -2,14 +2,13 @@ package com.core.residence.repositories;
 import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import com.core.residence.model.Room;
-import com.core.residence.model.User;
+import org.bson.types.ObjectId;
 
-public interface HabitacionRepository extends MongoRepository<Room, String> {
+@Repository("HabitacionRepository")
+public interface HabitacionRepository extends MongoRepository<Room, ObjectId> {
 
-	Room saveRoom(Room hab);
-
-	Optional<Room> findById(Long roomId);
 
 }
