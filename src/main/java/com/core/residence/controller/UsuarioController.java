@@ -48,8 +48,8 @@ public class UsuarioController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @GetMapping("/users/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable String id) {
+    @GetMapping("/users/id={id}")
+    public ResponseEntity<User> getUserById(@PathVariable String id) {
         // Aquí puedes realizar la lógica para obtener un usuario por su ID
     	log.info(" Get UserbyId " + id);
     	User user = userService.getUserById(id);
@@ -57,8 +57,9 @@ public class UsuarioController {
         // Verificar si se encontró el usuario
         if (user != null) {
         	log.info(user.toString());
+        	
             // Devolver el usuario y el estado HTTP 200 OK si se encontró
-            return new ResponseEntity<>( HttpStatus.OK);
+            return ResponseEntity.ok(user);
         } else {
             // Devolver un estado HTTP 404 Not Found si el usuario no se encontró
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

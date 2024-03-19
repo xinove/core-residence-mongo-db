@@ -12,13 +12,19 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.stereotype.Repository;
 
 import com.core.residence.model.User;
 import com.core.residence.repositories.UsuarioRepository;
+import com.core.residence.service.UserService;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Repository
+@Slf4j
 public class UsuarioRepositoryImpl implements UsuarioRepository {
 
 	private final MongoOperations mongoOperations;
@@ -29,7 +35,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     }
 
 	@Override
-	public User saveUser(User user) {
+	public User save(User user) {
 		mongoOperations.save(user);
 		return user;
 	}
@@ -70,12 +76,6 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
 	}
 
 	
-
-	@Override
-	public <S extends User> S save(S entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public long count() {
@@ -152,10 +152,11 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
 	}
 
 	@Override
-	public Optional<User> findById(ObjectId id) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
-	}
+	 public Optional<User> findById(ObjectId id) {
+        Query query = new Query(Criteria.where("_id").is(id));
+        User user = mongoOperations.findOne(query, User.class, "usuarios");
+        return Optional.ofNullable(user);
+    }
 
 	@Override
 	public boolean existsById(ObjectId id) {
@@ -179,6 +180,12 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
 	public void deleteAllById(Iterable<? extends ObjectId> ids) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public User saveUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
     // Implementación personalizada de métodos del repositorio si es necesario
