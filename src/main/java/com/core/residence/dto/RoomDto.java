@@ -17,6 +17,10 @@ public class RoomDto {
 	
 	private String id;
 	private String origen;
+	private String pais;
+	private String localidad;
+	private String residencia;
+	
 	private String name;
 	private String priceInfo;
 	private String externalId;

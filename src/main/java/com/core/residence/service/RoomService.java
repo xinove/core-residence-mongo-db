@@ -4,10 +4,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import com.core.residence.dto.RoomDto;
 import com.core.residence.dto.UserDto;
+import com.core.residence.model.HistoricRoom;
 import com.core.residence.model.Room;
 import com.core.residence.model.User;
 import com.core.residence.repositories.HabitacionRepository;
@@ -27,6 +30,11 @@ public class RoomService {
 
 	public List<Room> findAll() {
         return roomRepository.findAll();
+	}
+	public Room getRoomByOrigenAndName(Room miroom) {
+		
+        return roomRepository.findByOrigenAndName(miroom);
+
 	}
 
 	public Room deleteRoomById(ObjectId roomId) {
@@ -55,6 +63,13 @@ public class RoomService {
 	public Room save(Room miRoom) {
         Room roomOptional = roomRepository.save(miRoom);
         return roomOptional;		
+	}
+	public Room updateHistoric(Room miRoom) {
+		//Creo el historico a partir de la habitación
+		HistoricRoom hr = new HistoricRoom();
+		hr.getHistoric(miRoom);
+		roomRepository.saveHistoric(hr);
+		return miRoom;		
 	}
 	
 	public Room getRoomById(String id) {

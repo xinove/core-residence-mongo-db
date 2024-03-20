@@ -98,7 +98,18 @@ public class HabitacionController {
     	log.info(" Post Rooml " );
     	Room miRoom = new Room();
     	miRoom.saveRoom(habitacion);
-    	miRoom = roomService.save(miRoom);
+    	boolean existe = true;
+    	
+    	Room oldRoom = roomService.getRoomByOrigenAndName(miRoom);
+    	
+    	if (oldRoom!= null)
+    		//Actualizo el historico
+    		miRoom = roomService.updateHistoric(miRoom);
+    	else { //la creo y guardo historico
+    		miRoom = roomService.save(miRoom);
+    		roomService.updateHistoric(miRoom);
+    	}
+    	 
     	log.info(" Get RoomrAll " );
     	if (miRoom == null)
     		return ResponseEntity.badRequest().build();

@@ -17,13 +17,18 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.stereotype.Repository;
 
+import com.core.residence.model.HistoricRoom;
 import com.core.residence.model.Room;
 import com.core.residence.model.User;
 import com.core.residence.repositories.HabitacionRepository;
 import com.core.residence.repositories.UsuarioRepository;
+import com.core.residence.service.RoomService;
+
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 @Repository
-
+@Slf4j
 public class HabitacionRepositoryImpl implements HabitacionRepository {
 
 	private final MongoOperations mongoOperations;
@@ -67,7 +72,7 @@ public class HabitacionRepositoryImpl implements HabitacionRepository {
 	public <S extends Room> List<S> saveAll(Iterable<S> entities) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}	
 
 	@Override
 	public List<Room> findAll() {
@@ -105,6 +110,10 @@ public class HabitacionRepositoryImpl implements HabitacionRepository {
 		Query query = new Query(Criteria.where("_id").is(entity.getId()));
 	    mongoOperations.remove(query, coleccionMongo);
 	}
+	public void saveHistoric(HistoricRoom hr) {
+	       mongoOperations.save( hr, "historico_habitaciones");
+	}
+
 
 	@Override
 	public void deleteAllById(Iterable<? extends ObjectId> ids) {
@@ -170,6 +179,21 @@ public class HabitacionRepositoryImpl implements HabitacionRepository {
 	public <S extends Room, R> R findBy(Example<S> example, Function<FetchableFluentQuery<S>, R> queryFunction) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Room findByOrigenAndName(Room miroom) {
+		 // Busca la habitacion por su ID en la base de datos
+		Query query = new Query();
+		//Buscamos la habitacion: 
+			
+		query.addCriteria(Criteria.where("origen").is(miroom.getOrigen()).and("name").is(miroom.getName()));
+		Room aux =  mongoOperations.findOne(query, Room.class);
+		if (aux !=null)
+			log.info("Existe: " + aux.getName());
+		else
+			log.info("Es NULL!!!");
+   		return aux;
 	}
 
 }
