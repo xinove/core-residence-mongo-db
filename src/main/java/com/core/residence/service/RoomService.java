@@ -29,7 +29,7 @@ public class RoomService {
         return roomRepository.findAll();
 	}
 
-	public Room deleteRoom(ObjectId roomId) {
+	public Room deleteRoomById(ObjectId roomId) {
 		 // Busca el usuario por su ID en la base de datos
         Optional<Room> userOptional = roomRepository.findById(roomId);
         

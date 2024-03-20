@@ -27,7 +27,7 @@ import com.core.residence.repositories.UsuarioRepository;
 public class HabitacionRepositoryImpl implements HabitacionRepository {
 
 	private final MongoOperations mongoOperations;
-
+	private final String coleccionMongo = "habitaciones";
 	@Autowired
     public HabitacionRepositoryImpl(MongoOperations mongoOperations) {
         this.mongoOperations = mongoOperations;
@@ -102,8 +102,8 @@ public class HabitacionRepositoryImpl implements HabitacionRepository {
 
 	@Override
 	public void delete(Room entity) {
-		// TODO Auto-generated method stub
-		
+		Query query = new Query(Criteria.where("_id").is(entity.getId()));
+	    mongoOperations.remove(query, coleccionMongo);
 	}
 
 	@Override

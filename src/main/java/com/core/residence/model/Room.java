@@ -1,5 +1,7 @@
 package com.core.residence.model;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.core.residence.dto.RoomDto;
@@ -18,6 +20,9 @@ import lombok.ToString;
 @Document(collection = "habitaciones")
 public class Room {
 
+	@Id
+    private ObjectId id;
+	private String origen;
 	private String name;
 	private String priceInfo;
 	private String externalId;
@@ -39,5 +44,6 @@ public class Room {
     	this.imageLink = miroom.getImageLink();
     	this.imagePromoMessage = miroom.getImagePromoMessage();
     	this.promoMessage = miroom.getPromoMessage();
+    	this.origen = miroom.getOrigen();
     }
 }

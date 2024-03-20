@@ -15,7 +15,8 @@ import lombok.ToString;
 @ToString
 public class RoomDto {
 	
-	private Long id;
+	private String id;
+	private String origen;
 	private String name;
 	private String priceInfo;
 	private String externalId;

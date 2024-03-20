@@ -2,8 +2,10 @@ package com.core.residence.controller;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,6 +62,25 @@ public class HabitacionController {
 	    	log.info(" Get RoombyId " + id);
 	    	Room hab = roomService.getRoomById(id);
 
+	        // Verificar si se encontró la habitacion
+	        if (hab != null) {
+	        	log.info(hab.toString());
+	        	
+	            // Devolver la habitacion y el estado HTTP 200 OK si se encontró
+	            return ResponseEntity.ok(hab);
+	        } else {
+	            // Devolver un estado HTTP 404 Not Found si el usuario no se encontró
+	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	        }
+	    }
+	  
+	  @DeleteMapping("/habitacion/id={id}")
+	    public ResponseEntity<Room> deleteRoomById(@PathVariable String id) {
+	        // Aquí puedes realizar la lógica para obtener un usuario por su ID
+	    	log.info(" Delete RoombyId " + id);
+	    	ObjectId objectId = new ObjectId(id);
+	    	Room hab = roomService.deleteRoomById(objectId);
+	    	
 	        // Verificar si se encontró la habitacion
 	        if (hab != null) {
 	        	log.info(hab.toString());
